@@ -28,10 +28,10 @@ function Section({ icon, title, children }) {
     <div style={{ marginBottom: 20 }}>
       <div style={{
         fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600, fontSize: 11,
-        letterSpacing: '.1em', color: '#3A7A99', marginBottom: 8,
+        letterSpacing: '.1em', color: '#3A5A99', marginBottom: 8,
         display: 'flex', alignItems: 'center', gap: 6
       }}>
-        <span style={{ color: '#00E5FF' }}>{icon}</span>{title}
+        <span style={{ color: '#1E88E5' }}>{icon}</span>{title}
       </div>
       {children}
     </div>
@@ -209,10 +209,10 @@ export default function ConflictPanel({ country, prediction, loading, error, his
               style={{
                 flex: 1, background: 'none', border: 'none', cursor: 'pointer',
                 padding: '10px 0', fontFamily: 'JetBrains Mono, monospace', fontSize: 10,
-                letterSpacing: '.08em', color: tab === key ? '#00E5FF' : '#3A7A99',
-                borderBottom: tab === key ? '2px solid #00E5FF' : '2px solid transparent',
+                letterSpacing: '.08em', color: tab === key ? '#1E88E5' : '#3A5A99',
+                borderBottom: tab === key ? '2px solid #1E88E5' : '2px solid transparent',
                 marginBottom: -1, transition: 'color .2s',
-                boxShadow: tab === key ? '0 2px 10px rgba(0,229,255,0.15)' : 'none'
+                boxShadow: tab === key ? '0 2px 10px rgba(30,136,229,0.15)' : 'none'
               }}
             >
               {label}

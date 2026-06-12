@@ -13,13 +13,13 @@ const RISK_HEX = {
   'BAJO':    '#00E676',
 }
 
-// Deep-space ocean: almost black with blue-teal emissive
+// Deep-space ocean: almost black with deep blue emissive
 const GLOBE_MATERIAL = new THREE.MeshPhongMaterial({
-  color:              new THREE.Color('#020A14'),
-  emissive:           new THREE.Color('#001830'),
-  emissiveIntensity:  0.35,
+  color:              new THREE.Color('#030614'),
+  emissive:           new THREE.Color('#0A0F30'),
+  emissiveIntensity:  0.4,
   shininess:          18,
-  specular:           new THREE.Color('#004477'),
+  specular:           new THREE.Color('#1A2A6C'),
 })
 
 export default function Globe3D({ onCountryClick, selectedCode, history }) {
@@ -76,11 +76,11 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
     const risk = historyMap[name]
 
     if (selectedCode && d.id?.toString() === selectedCode) {
-      return risk ? RISK_HEX[risk] + 'CC' : 'rgba(0,255,210,0.75)'
+      return risk ? RISK_HEX[risk] + 'CC' : 'rgba(255,23,68,0.75)'
     }
-    if (name === hovered) return 'rgba(0,210,255,0.38)'
+    if (name === hovered) return 'rgba(30,136,229,0.42)'
     if (risk) return RISK_HEX[risk] + '44'
-    return 'rgba(0,40,80,0.55)'
+    return 'rgba(0,15,55,0.55)'
   }, [selectedCode, hovered, historyMap])
 
   // Hovered/selected countries rise slightly
@@ -94,8 +94,8 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
   // Side color — dark teal extrusion
   const sideColor = useCallback((d) => {
     const name = d.properties?.name
-    if (name === hovered) return 'rgba(0,180,255,0.25)'
-    return 'rgba(0,20,40,0.85)'
+    if (name === hovered) return 'rgba(30,136,229,0.25)'
+    return 'rgba(0,10,35,0.85)'
   }, [hovered])
 
   // Border / stroke color — the key hologram element
@@ -103,11 +103,11 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
     const name = d.properties?.name
     if (selectedCode && d.id?.toString() === selectedCode) {
       const risk = historyMap[name]
-      return risk ? RISK_HEX[risk] : '#00FFD5'
+      return risk ? RISK_HEX[risk] : '#FF1744'
     }
-    if (name === hovered) return '#00E5FF'
+    if (name === hovered) return '#1E88E5'
     if (historyMap[name]) return RISK_HEX[historyMap[name]] + 'CC'
-    return '#0A4060'
+    return '#0A1535'
   }, [selectedCode, hovered, historyMap])
 
   // HTML tooltip — hologram style
@@ -118,8 +118,8 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
     const rc   = risk ? RISK_HEX[risk] : null
     const badge = risk
       ? `<span style="margin-left:8px;background:${rc}22;color:${rc};border:1px solid ${rc};border-radius:3px;padding:1px 7px;font-size:10px;font-family:JetBrains Mono,monospace;letter-spacing:.05em;">${risk}</span>`
-      : `<span style="margin-left:8px;color:#00AACC;font-size:10px;font-family:JetBrains Mono,monospace;">ANALIZAR</span>`
-    return `<div style="background:rgba(0,8,20,0.95);border:1px solid #00BFFF;border-radius:4px;padding:7px 14px;font-family:Space Grotesk,sans-serif;display:flex;align-items:center;box-shadow:0 0 18px rgba(0,191,255,0.35),0 4px 24px rgba(0,0,0,.9);white-space:nowrap;"><span style="color:#00E5FF;font-size:12px;font-weight:600;letter-spacing:.04em;">${name}</span>${badge}</div>`
+      : `<span style="margin-left:8px;color:#5BA8E5;font-size:10px;font-family:JetBrains Mono,monospace;">ANALIZAR</span>`
+    return `<div style="background:rgba(2,6,20,0.95);border:1px solid #1E88E5;border-radius:4px;padding:7px 14px;font-family:Space Grotesk,sans-serif;display:flex;align-items:center;box-shadow:0 0 18px rgba(30,136,229,0.35),0 4px 24px rgba(0,0,0,.9);white-space:nowrap;"><span style="color:#90CAF9;font-size:12px;font-weight:600;letter-spacing:.04em;">${name}</span>${badge}</div>`
   }, [historyMap])
 
   // ── Hover handler ─────────────────────────────────────────────────────────
@@ -149,13 +149,13 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
   }, [onCountryClick])
 
   return (
-    <div ref={containerRef} style={{ flex: 1, position: 'relative', overflow: 'hidden', background: '#020912' }}>
-      {/* Subtle hologram grid overlay */}
+    <div ref={containerRef} style={{ flex: 1, position: 'relative', overflow: 'hidden', background: '#050810' }}>
+      {/* Subtle grid overlay */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1,
         backgroundImage: `
-          linear-gradient(rgba(0,200,255,0.025) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0,200,255,0.025) 1px, transparent 1px)
+          linear-gradient(rgba(30,100,229,0.025) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(30,100,229,0.025) 1px, transparent 1px)
         `,
         backgroundSize: '48px 48px'
       }} />
@@ -165,8 +165,8 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
           ref={globeRef}
           width={dims.w}
           height={dims.h}
-          backgroundColor="#020912"
-          atmosphereColor="#00AAFF"
+          backgroundColor="#050810"
+          atmosphereColor="#1565C0"
           atmosphereAltitude={0.25}
           globeMaterial={GLOBE_MATERIAL}
           polygonsData={countries}
@@ -184,7 +184,7 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
       {/* Vignette */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
-        background: 'radial-gradient(ellipse at center, transparent 36%, #020912 76%)'
+        background: 'radial-gradient(ellipse at center, transparent 36%, #050810 76%)'
       }} />
     </div>
   )

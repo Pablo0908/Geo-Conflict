@@ -97,7 +97,7 @@ export default function CommentsSection({ country, user }) {
             <Avatar name={c.username} />
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600, fontSize: 12, color: '#00C8FF' }}>
+                <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600, fontSize: 12, color: '#90CAF9' }}>
                   {c.username}
                 </span>
                 <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 9, color: '#1A4060' }}>
@@ -127,21 +127,21 @@ export default function CommentsSection({ country, user }) {
             maxLength={500}
             rows={2}
             style={{
-              flex: 1, background: 'rgba(0,20,40,0.7)', border: '1px solid #0A3A55',
+              flex: 1, background: 'rgba(0,10,35,0.7)', border: '1px solid #0A1535',
               borderRadius: 4, padding: '8px 10px', color: '#C8F0FF',
               fontFamily: 'Inter, sans-serif', fontSize: 12, resize: 'none', outline: 'none',
               transition: 'border-color .2s'
             }}
-            onFocus={e =>  { e.target.style.borderColor = '#00AAFF' }}
-            onBlur={e =>   { e.target.style.borderColor = '#0A3A55' }}
+            onFocus={e =>  { e.target.style.borderColor = '#1E88E5' }}
+            onBlur={e =>   { e.target.style.borderColor = '#0A1535' }}
           />
           <button
             type="submit"
             disabled={posting || !text.trim()}
             style={{
-              background: 'rgba(0,180,255,0.1)', border: '1px solid #00AAFF',
+              background: 'rgba(30,136,229,0.1)', border: '1px solid #1E88E5',
               borderRadius: 4, padding: '0 14px', cursor: 'pointer',
-              color: '#00E5FF', fontFamily: 'JetBrains Mono, monospace',
+              color: '#90CAF9', fontFamily: 'JetBrains Mono, monospace',
               fontSize: 11, letterSpacing: '.06em', alignSelf: 'stretch',
               opacity: (!text.trim() || posting) ? 0.35 : 1, transition: 'opacity .2s'
             }}

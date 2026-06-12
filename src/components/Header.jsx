@@ -16,14 +16,14 @@ export default function Header({ analyzedCount, user, onLogout }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         <span style={{
           fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: 20,
-          letterSpacing: '.1em', color: '#00E5FF',
-          textShadow: '0 0 18px rgba(0,229,255,0.55)'
+          letterSpacing: '.1em', color: '#FF1744',
+          textShadow: '0 0 18px rgba(255,23,68,0.55)'
         }}>
           ⊕ CONFLICTLY
         </span>
         <span style={{
-          color: '#3A7A99', fontSize: 11, fontFamily: 'JetBrains Mono, monospace',
-          letterSpacing: '.06em', borderLeft: '1px solid #0A3A55', paddingLeft: 12
+          color: '#3A5A99', fontSize: 11, fontFamily: 'JetBrains Mono, monospace',
+          letterSpacing: '.06em', borderLeft: '1px solid #0A1535', paddingLeft: 12
         }}>
           CONFLICT INTELLIGENCE PLATFORM
         </span>
@@ -45,14 +45,14 @@ export default function Header({ analyzedCount, user, onLogout }) {
             <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
               <div style={{
                 width: 26, height: 26, borderRadius: '50%',
-                background: 'rgba(0,100,180,0.2)', border: '1px solid #00AAFF',
+                background: 'rgba(30,136,229,0.15)', border: '1px solid #1E88E5',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: 11,
-                color: '#00C8FF'
+                color: '#90CAF9'
               }}>
                 {user.username.slice(0, 2).toUpperCase()}
               </div>
-              <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: '#00C8FF' }}>
+              <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: '#90CAF9' }}>
                 {user.username}
               </span>
             </div>

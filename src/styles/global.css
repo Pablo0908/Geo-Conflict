@@ -1,16 +1,16 @@
 :root {
-  --bg-deep:      #020912;
-  --bg-panel:     #060F1C;
-  --map-ocean:    #020A14;
-  --map-land:     #071A28;
-  --map-hover:    #00D2FF;
-  --map-selected: #00FFD5;
+  --bg-deep:      #050810;
+  --bg-panel:     #080F1A;
+  --map-ocean:    #030614;
+  --map-land:     #0A1228;
+  --map-hover:    #1E88E5;
+  --map-selected: #FF1744;
   --accent-red:   #FF1744;
   --accent-amber: #FF9100;
   --accent-green: #00E676;
-  --text-primary: #C8F0FF;
-  --text-muted:   #3A7A99;
-  --border:       #0A3A55;
+  --text-primary: #D0E4FF;
+  --text-muted:   #3A5A99;
+  --border:       #0A1535;
 }
 
 *, *::before, *::after {

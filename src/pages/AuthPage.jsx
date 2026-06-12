@@ -34,8 +34,8 @@ function Field({ label, type = 'text', value, onChange, placeholder }) {
         onBlur={() => setFocused(false)}
         style={{
           ...INPUT_BASE,
-          borderColor: focused ? '#00AAFF' : '#0A3A55',
-          boxShadow:   focused ? '0 0 14px rgba(0,170,255,0.28)' : 'none',
+          borderColor: focused ? '#1E88E5' : '#0A1535',
+          boxShadow:   focused ? '0 0 14px rgba(30,136,229,0.28)' : 'none',
         }}
       />
     </div>
@@ -78,8 +78,8 @@ export default function AuthPage({ onSuccess }) {
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none',
         backgroundImage: `
-          linear-gradient(rgba(0,200,255,0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0,200,255,0.03) 1px, transparent 1px)
+          linear-gradient(rgba(30,100,229,0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(30,100,229,0.03) 1px, transparent 1px)
         `,
         backgroundSize: '48px 48px'
       }} />
@@ -94,12 +94,12 @@ export default function AuthPage({ onSuccess }) {
         <div style={{ textAlign: 'center', marginBottom: 36 }}>
           <div style={{
             fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: 30,
-            letterSpacing: '.12em', color: '#00E5FF',
-            textShadow: '0 0 28px rgba(0,229,255,0.65)', marginBottom: 8
+            letterSpacing: '.12em', color: '#FF1744',
+            textShadow: '0 0 28px rgba(255,23,68,0.65)', marginBottom: 8
           }}>
             ⊕ CONFLICTLY
           </div>
-          <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, letterSpacing: '.18em', color: '#1A4060' }}>
+          <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, letterSpacing: '.18em', color: '#1A2060' }}>
             CONFLICT INTELLIGENCE PLATFORM
           </div>
         </div>
@@ -113,7 +113,7 @@ export default function AuthPage({ onSuccess }) {
           boxShadow: '0 0 50px rgba(0,100,200,0.1), 0 24px 60px rgba(0,0,0,0.7)'
         }}>
           {/* Tabs */}
-          <div style={{ display: 'flex', marginBottom: 28, borderBottom: '1px solid #0A3A55' }}>
+          <div style={{ display: 'flex', marginBottom: 28, borderBottom: '1px solid #0A1535' }}>
             {[['login','ACCEDER'], ['register','REGISTRARSE']].map(([t, label]) => (
               <button
                 key={t}
@@ -122,8 +122,8 @@ export default function AuthPage({ onSuccess }) {
                   flex: 1, background: 'none', border: 'none', cursor: 'pointer',
                   padding: '10px 0', fontFamily: 'JetBrains Mono, monospace',
                   fontSize: 11, letterSpacing: '.1em',
-                  color: tab === t ? '#00E5FF' : '#3A7A99',
-                  borderBottom: tab === t ? '2px solid #00E5FF' : '2px solid transparent',
+                  color: tab === t ? '#1E88E5' : '#3A5A99',
+                  borderBottom: tab === t ? '2px solid #1E88E5' : '2px solid transparent',
                   marginBottom: -1, transition: 'color .2s'
                 }}
               >
@@ -154,23 +154,23 @@ export default function AuthPage({ onSuccess }) {
               disabled={loading}
               style={{
                 width: '100%', padding: '12px 0', marginTop: 4,
-                background: loading ? 'rgba(0,100,160,0.2)' : 'rgba(0,180,255,0.1)',
-                border: '1px solid #00AAFF', borderRadius: 4,
+                background: loading ? 'rgba(10,40,120,0.2)' : 'rgba(30,136,229,0.12)',
+                border: '1px solid #1E88E5', borderRadius: 4,
                 cursor: loading ? 'not-allowed' : 'pointer',
                 fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600,
-                fontSize: 13, letterSpacing: '.1em', color: '#00E5FF',
-                boxShadow: loading ? 'none' : '0 0 20px rgba(0,170,255,0.18)',
+                fontSize: 13, letterSpacing: '.1em', color: '#90CAF9',
+                boxShadow: loading ? 'none' : '0 0 20px rgba(30,136,229,0.18)',
                 transition: 'all .2s'
               }}
-              onMouseEnter={e => { if (!loading) e.currentTarget.style.background = 'rgba(0,180,255,0.2)' }}
-              onMouseLeave={e => { e.currentTarget.style.background = loading ? 'rgba(0,100,160,0.2)' : 'rgba(0,180,255,0.1)' }}
+              onMouseEnter={e => { if (!loading) e.currentTarget.style.background = 'rgba(30,136,229,0.22)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = loading ? 'rgba(10,40,120,0.2)' : 'rgba(30,136,229,0.12)' }}
             >
               {loading ? '...' : tab === 'login' ? 'ACCEDER AL SISTEMA' : 'CREAR CUENTA'}
             </button>
           </form>
         </div>
 
-        <div style={{ textAlign: 'center', marginTop: 22, fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: '#0A2840', letterSpacing: '.08em' }}>
+        <div style={{ textAlign: 'center', marginTop: 22, fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: '#0A1240', letterSpacing: '.08em' }}>
           SISTEMA DE INTELIGENCIA GEOPOLÍTICA CLASIFICADO
         </div>
       </div>
