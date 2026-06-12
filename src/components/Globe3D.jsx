@@ -12,15 +12,14 @@ const RISK_HEX = {
   'BAJO':    '#00E676',
 }
 
-// Hologram ocean — deep blue, semi-transparent, high emissive
+// Hologram ocean — DARK so glowing land/borders read on top of it.
+// Solid (not transparent) to avoid back-faces bleeding through.
 const GLOBE_MATERIAL = new THREE.MeshPhongMaterial({
-  color:             new THREE.Color('#0A1E3A'),
-  emissive:          new THREE.Color('#0033AA'),
-  emissiveIntensity: 0.9,
-  transparent:       true,
-  opacity:           0.92,
-  shininess:         60,
-  specular:          new THREE.Color('#4488FF'),
+  color:             new THREE.Color('#040B1C'),
+  emissive:          new THREE.Color('#06205A'),
+  emissiveIntensity: 0.35,
+  shininess:         55,
+  specular:          new THREE.Color('#1E5AC0'),
 })
 
 export default function Globe3D({ onCountryClick, selectedCode, history }) {
@@ -67,21 +66,21 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
     ctrl.maxDistance     = 580
     ctrl.enablePan       = false
 
-    // Add hologram lighting to the Three.js scene
+    // Hologram lighting — keep ocean dark, light the land relief + edge glow
     const scene = globeRef.current.scene()
 
-    // Bright blue ambient — illuminates the whole globe
-    const ambient = new THREE.AmbientLight(0x2255CC, 2.5)
+    // Low blue ambient — lifts shadows just enough, keeps ocean dark
+    const ambient = new THREE.AmbientLight(0x1A3A7A, 1.1)
     scene.add(ambient)
 
-    // Front directional light — gives the globe shape
-    const front = new THREE.DirectionalLight(0x5599FF, 3.0)
-    front.position.set(1, 0.5, 2)
+    // Front directional — gives the raised land polygons their lit relief
+    const front = new THREE.DirectionalLight(0x6699FF, 1.6)
+    front.position.set(1, 0.6, 2)
     scene.add(front)
 
-    // Rim light from behind — hologram edge glow
-    const rim = new THREE.DirectionalLight(0x0044FF, 1.5)
-    rim.position.set(-2, -1, -1)
+    // Rim light from behind — hologram edge glow on the silhouette
+    const rim = new THREE.DirectionalLight(0x0055FF, 1.4)
+    rim.position.set(-2, -1, -1.5)
     scene.add(rim)
   }, [])
 
@@ -89,11 +88,11 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
     const name = d.properties?.name
     const risk = historyMap[name]
     if (selectedCode && d.id?.toString() === selectedCode) {
-      return risk ? RISK_HEX[risk] + 'CC' : 'rgba(255,23,68,0.80)'
+      return risk ? RISK_HEX[risk] + 'EE' : 'rgba(255,23,68,0.90)'
     }
-    if (name === hovered) return 'rgba(30,136,229,0.65)'
-    if (risk) return RISK_HEX[risk] + '77'
-    return 'rgba(0,60,160,0.55)'
+    if (name === hovered) return 'rgba(60,160,255,0.92)'
+    if (risk) return RISK_HEX[risk] + 'AA'
+    return 'rgba(18,72,150,0.92)'
   }, [selectedCode, hovered, historyMap])
 
   const altitude = useCallback((d) => {
@@ -105,8 +104,8 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
 
   const sideColor = useCallback((d) => {
     const name = d.properties?.name
-    if (name === hovered) return 'rgba(30,136,229,0.35)'
-    return 'rgba(0,30,100,0.70)'
+    if (name === hovered) return 'rgba(60,160,255,0.55)'
+    return 'rgba(20,70,150,0.55)'
   }, [hovered])
 
   const strokeColor = useCallback((d) => {
@@ -115,9 +114,9 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
       const risk = historyMap[name]
       return risk ? RISK_HEX[risk] : '#FF1744'
     }
-    if (name === hovered) return '#4AABFF'
-    if (historyMap[name]) return RISK_HEX[historyMap[name]] + 'CC'
-    return '#1A4488'
+    if (name === hovered) return '#7CC4FF'
+    if (historyMap[name]) return RISK_HEX[historyMap[name]] + 'EE'
+    return '#3D8AE0'
   }, [selectedCode, hovered, historyMap])
 
   const makeLabel = useCallback((d) => {
