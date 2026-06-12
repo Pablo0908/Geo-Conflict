@@ -15,11 +15,11 @@ const RISK_HEX = {
 
 // Deep-space ocean: almost black with deep blue emissive
 const GLOBE_MATERIAL = new THREE.MeshPhongMaterial({
-  color:              new THREE.Color('#0A1828'),
-  emissive:           new THREE.Color('#0F2040'),
-  emissiveIntensity:  0.45,
-  shininess:          20,
-  specular:           new THREE.Color('#1E3A80'),
+  color:              new THREE.Color('#1A3A5C'),
+  emissive:           new THREE.Color('#1A3060'),
+  emissiveIntensity:  0.7,
+  shininess:          30,
+  specular:           new THREE.Color('#3A6AAC'),
 })
 
 export default function Globe3D({ onCountryClick, selectedCode, history }) {
@@ -78,9 +78,9 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
     if (selectedCode && d.id?.toString() === selectedCode) {
       return risk ? RISK_HEX[risk] + 'CC' : 'rgba(255,23,68,0.75)'
     }
-    if (name === hovered) return 'rgba(30,136,229,0.50)'
-    if (risk) return RISK_HEX[risk] + '55'
-    return 'rgba(15,35,75,0.65)'
+    if (name === hovered) return 'rgba(30,136,229,0.70)'
+    if (risk) return RISK_HEX[risk] + '88'
+    return 'rgba(30,65,120,0.75)'
   }, [selectedCode, hovered, historyMap])
 
   // Hovered/selected countries rise slightly
@@ -166,8 +166,8 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
           width={dims.w}
           height={dims.h}
           backgroundColor="#0D1F35"
-          atmosphereColor="#1565C0"
-          atmosphereAltitude={0.25}
+          atmosphereColor="#4A90D9"
+          atmosphereAltitude={0.28}
           globeMaterial={GLOBE_MATERIAL}
           polygonsData={countries}
           polygonCapColor={capColor}
@@ -184,7 +184,7 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
       {/* Vignette */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
-        background: 'radial-gradient(ellipse at center, transparent 40%, #0D1F35 82%)'
+        background: 'radial-gradient(ellipse at center, transparent 45%, #0D1F35 88%)'
       }} />
     </div>
   )
