@@ -6,8 +6,16 @@ import ConflictPanel from './components/ConflictPanel.jsx'
 import StarField from './components/StarField.jsx'
 import AuthPage from './pages/AuthPage.jsx'
 import { predictConflicts } from './services/claudeApi.js'
+import { getComments } from './services/commentsApi.js'
 
-const CACHE_KEY_PREFIX = 'conflictly_'
+// v2 — analysis shape changed (conflictStatus + comment analysis), so ignore old caches.
+const CACHE_KEY_PREFIX = 'conflictly_v2_'
+
+// A cache is only valid while the country's comments are unchanged, since the
+// analysis reads them. Comments arrive newest-first from the API.
+function commentSig(comments) {
+  return `${comments.length}:${comments[0]?.id || ''}`
+}
 
 function getCache(countryCode) {
   try { const r = sessionStorage.getItem(CACHE_KEY_PREFIX + countryCode); return r ? JSON.parse(r) : null } catch { return null }
@@ -54,20 +62,30 @@ export default function App() {
     setSelected({ name: countryName, code: countryCode })
     setError(null)
     setMobileOpen(true)
-
-    const cached = getCache(countryCode)
-    if (cached) { setPrediction(cached); setLoading(false); return }
-
-    setLoading(true)
     setPrediction(null)
+    setLoading(true)
+
     try {
-      const data = await predictConflicts(countryName, countryCode)
-      setCache(countryCode, data)
+      // 1. Read the country's community comments — the AI analyzes these.
+      const comments = await getComments(countryName).catch(() => [])
+      const sig      = commentSig(comments)
+
+      // 2. Reuse a cached analysis only if the comments haven't changed.
+      const cached = getCache(countryCode)
+      let data
+      if (cached && cached._sig === sig) {
+        data = cached
+      } else {
+        data = await predictConflicts(countryName, countryCode, comments)
+        data._sig = sig
+        setCache(countryCode, data)
+        setCount(prev => prev + 1)
+      }
+
       setPrediction(data)
-      setCount(prev => prev + 1)
       setHistory(prev => {
         const filtered = prev.filter(h => h.code !== countryCode)
-        return [{ name: countryName, code: countryCode, risk: data.riskLevel }, ...filtered].slice(0, 5)
+        return [{ name: countryName, code: countryCode, status: data.conflictStatus }, ...filtered].slice(0, 5)
       })
     } catch (err) {
       setError(err.message || 'Error desconocido')

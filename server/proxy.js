@@ -1,5 +1,4 @@
 import express from 'express'
-import Anthropic from '@anthropic-ai/sdk'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import { fileURLToPath } from 'url'
@@ -14,7 +13,19 @@ const app = express()
 app.use(express.json())
 app.use(cors({ origin: ['http://localhost:5173', 'http://localhost:4173'] }))
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+// ── Gemini config ───────────────────────────────────────────────────────────
+// Accept the key under any of these names so an existing .env keeps working.
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || process.env.ANTHROPIC_API_KEY
+const GEMINI_MODEL   = process.env.GEMINI_MODEL || 'gemini-3.5-flash'
+
+// Conflict analysis + heated user comments must not trip Gemini's safety filters
+// into refusing. Relax the four standard categories.
+const SAFETY_SETTINGS = [
+  'HARM_CATEGORY_HARASSMENT',
+  'HARM_CATEGORY_HATE_SPEECH',
+  'HARM_CATEGORY_SEXUALLY_EXPLICIT',
+  'HARM_CATEGORY_DANGEROUS_CONTENT',
+].map(category => ({ category, threshold: 'BLOCK_NONE' }))
 
 // ── Data helpers ──────────────────────────────────────────────────────────────
 const DATA_DIR      = join(__dirname, 'data')
@@ -103,27 +114,58 @@ app.post('/api/comments', requireAuth, (req, res) => {
   res.json(comment)
 })
 
-// ── Claude prediction ─────────────────────────────────────────────────────────
+// ── Gemini prediction ───────────────────────────────────────────────────────
 app.post('/api/predict', async (req, res) => {
   const { systemPrompt, userPrompt } = req.body
   if (!systemPrompt || !userPrompt)
     return res.status(400).json({ error: 'Faltan systemPrompt o userPrompt' })
 
+  if (!GEMINI_API_KEY || GEMINI_API_KEY.startsWith('tu_api'))
+    return res.status(401).json({ error: 'GEMINI_API_KEY no configurada en .env' })
+
   try {
-    const message = await client.messages.create({
-      model: 'claude-sonnet-4-6', max_tokens: 1024,
-      system: systemPrompt,
-      messages: [{ role: 'user', content: userPrompt }]
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`
+    const gemRes = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        systemInstruction: { parts: [{ text: systemPrompt }] },
+        contents: [{ role: 'user', parts: [{ text: userPrompt }] }],
+        safetySettings: SAFETY_SETTINGS,
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 2048,
+          responseMimeType: 'application/json',   // force clean JSON, no markdown fences
+        },
+      }),
     })
-    res.json({ content: message.content[0].text })
+
+    const data = await gemRes.json()
+
+    if (!gemRes.ok) {
+      const msg = data?.error?.message || `Gemini HTTP ${gemRes.status}`
+      console.error('Gemini API error:', msg)
+      return res.status(gemRes.status).json({ error: msg })
+    }
+
+    const candidate = data.candidates?.[0]
+    const text = (candidate?.content?.parts || []).map(p => p.text).filter(Boolean).join('')
+
+    if (!text) {
+      const reason = candidate?.finishReason || data.promptFeedback?.blockReason || 'sin contenido'
+      console.error('Gemini returned no text:', reason)
+      return res.status(502).json({ error: `Gemini no devolvió texto (${reason})` })
+    }
+
+    res.json({ content: text })
   } catch (error) {
-    console.error('Claude API error:', error.message)
+    console.error('Gemini request failed:', error.message)
     res.status(500).json({ error: error.message })
   }
 })
 
 app.listen(3001, () => {
-  console.log('🛰  Proxy running on http://localhost:3001')
-  if (!process.env.ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY === 'tu_api_key_aqui')
-    console.warn('⚠  ANTHROPIC_API_KEY not set — edit .env')
+  console.log(`🛰  Proxy running on http://localhost:3001 — Gemini model: ${GEMINI_MODEL}`)
+  if (!GEMINI_API_KEY || GEMINI_API_KEY.startsWith('tu_api'))
+    console.warn('⚠  GEMINI_API_KEY not set — edit .env (GEMINI_API_KEY=AIza...)')
 })

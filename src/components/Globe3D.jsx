@@ -2,15 +2,9 @@ import Globe from 'react-globe.gl'
 import * as THREE from 'three'
 import { feature } from 'topojson-client'
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
+import { STATUS_HEX, STATUS_META } from './ConflictBadge.jsx'
 
 const GEO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
-
-const RISK_HEX = {
-  'CRÍTICO': '#FF1744',
-  'ALTO':    '#FF9100',
-  'MEDIO':   '#FFE000',
-  'BAJO':    '#00E676',
-}
 
 // Hologram ocean — DARK so glowing land/borders read on top of it.
 // Solid (not transparent) to avoid back-faces bleeding through.
@@ -31,9 +25,10 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
   const [hovered, setHovered]     = useState(null)
   const [dims, setDims]           = useState({ w: 0, h: 0 })
 
+  // name → conflictStatus, for coloring already-analyzed countries.
   const historyMap = useMemo(() => {
     const m = {}
-    history.forEach(h => { m[h.name] = h.risk })
+    history.forEach(h => { m[h.name] = h.status })
     return m
   }, [history])
 
@@ -85,13 +80,13 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
   }, [])
 
   const capColor = useCallback((d) => {
-    const name = d.properties?.name
-    const risk = historyMap[name]
+    const name   = d.properties?.name
+    const status = historyMap[name]
     if (selectedCode && d.id?.toString() === selectedCode) {
-      return risk ? RISK_HEX[risk] + 'EE' : 'rgba(255,23,68,0.90)'
+      return status ? STATUS_HEX[status] + 'EE' : 'rgba(255,23,68,0.90)'
     }
     if (name === hovered) return 'rgba(60,160,255,0.92)'
-    if (risk) return RISK_HEX[risk] + 'AA'
+    if (status) return STATUS_HEX[status] + 'AA'
     return 'rgba(18,72,150,0.92)'
   }, [selectedCode, hovered, historyMap])
 
@@ -111,22 +106,23 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
   const strokeColor = useCallback((d) => {
     const name = d.properties?.name
     if (selectedCode && d.id?.toString() === selectedCode) {
-      const risk = historyMap[name]
-      return risk ? RISK_HEX[risk] : '#FF1744'
+      const status = historyMap[name]
+      return status ? STATUS_HEX[status] : '#FF1744'
     }
     if (name === hovered) return '#7CC4FF'
-    if (historyMap[name]) return RISK_HEX[historyMap[name]] + 'EE'
+    if (historyMap[name]) return STATUS_HEX[historyMap[name]] + 'EE'
     return '#3D8AE0'
   }, [selectedCode, hovered, historyMap])
 
   const makeLabel = useCallback((d) => {
     const name = d.properties?.name
     if (!name) return ''
-    const risk = historyMap[name]
-    const rc   = risk ? RISK_HEX[risk] : null
-    const badge = risk
-      ? `<span style="margin-left:8px;background:${rc}22;color:${rc};border:1px solid ${rc};border-radius:3px;padding:1px 7px;font-size:10px;font-family:JetBrains Mono,monospace;letter-spacing:.05em;">${risk}</span>`
-      : `<span style="margin-left:8px;color:#5BA8E5;font-size:10px;font-family:JetBrains Mono,monospace;">ANALIZAR</span>`
+    const status = historyMap[name]
+    const rc     = status ? STATUS_HEX[status] : null
+    const text   = status ? (STATUS_META[status]?.short || status) : null
+    const badge = status
+      ? `<span style="margin-left:8px;background:${rc}22;color:${rc};border:1px solid ${rc};border-radius:3px;padding:1px 7px;font-size:10px;font-family:JetBrains Mono,monospace;letter-spacing:.05em;text-shadow:0 0 7px ${rc};">${text}</span>`
+      : `<span style="margin-left:8px;color:#5BA8E5;font-size:10px;font-family:JetBrains Mono,monospace;text-shadow:0 0 6px rgba(91,168,229,0.7);">ANALIZAR</span>`
     return `<div style="background:rgba(5,15,40,0.95);border:1px solid #1E88E5;border-radius:4px;padding:7px 14px;font-family:Space Grotesk,sans-serif;display:flex;align-items:center;box-shadow:0 0 18px rgba(30,136,229,0.5),0 4px 24px rgba(0,0,0,.9);white-space:nowrap;"><span style="color:#90CAF9;font-size:12px;font-weight:600;letter-spacing:.04em;text-shadow:0 0 8px rgba(30,136,229,0.9);">${name}</span>${badge}</div>`
   }, [historyMap])
 
