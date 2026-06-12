@@ -1,8 +1,8 @@
 export default function Header({ analyzedCount, user, onLogout }) {
   return (
     <header style={{
-      background: 'rgba(2,9,18,0.92)',
-      borderBottom: '1px solid #0A3A55',
+      background: 'rgba(13,30,53,0.95)',
+      borderBottom: '1px solid #1E3D60',
       boxShadow: '0 1px 20px rgba(0,180,255,0.08)',
       padding: '0 24px',
       height: 56,

@@ -75,7 +75,7 @@ function PredictionView({ country, prediction }) {
   return (
     <div style={{ padding: '20px 20px 24px', overflowY: 'auto', flex: 1 }}>
       {/* Country header */}
-      <div style={{ marginBottom: 20, paddingBottom: 16, borderBottom: '1px solid #0A3A55' }}>
+      <div style={{ marginBottom: 20, paddingBottom: 16, borderBottom: '1px solid #1E3D60' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
           <h2 style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: 18, color: '#C8F0FF' }}>
             {prediction.country || country.name}
@@ -98,7 +98,7 @@ function PredictionView({ country, prediction }) {
       {/* Conflicts */}
       <Section icon="▸" title="CONFLICTOS POTENCIALES">
         {prediction.potentialConflicts?.map((c, i) => (
-          <div key={i} style={{ background: 'rgba(0,20,40,0.5)', border: '1px solid #0A3A55', borderRadius: 6, padding: '10px 14px', marginBottom: 8 }}>
+          <div key={i} style={{ background: 'rgba(15,35,70,0.55)', border: '1px solid #1E3D60', borderRadius: 6, padding: '10px 14px', marginBottom: 8 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
               <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600, fontSize: 12, color: '#C8F0FF' }}>
                 {i + 1}. {c.type}
@@ -119,7 +119,7 @@ function PredictionView({ country, prediction }) {
       <Section icon="▸" title="ACTORES CLAVE">
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
           {prediction.keyActors?.map((a, i) => (
-            <span key={i} style={{ background: 'rgba(0,40,80,0.5)', border: '1px solid #0A3A55', borderRadius: 4, padding: '3px 10px', fontSize: 11, color: '#C8F0FF' }}>{a}</span>
+            <span key={i} style={{ background: 'rgba(20,50,100,0.55)', border: '1px solid #1E3D60', borderRadius: 4, padding: '3px 10px', fontSize: 11, color: '#C8F0FF' }}>{a}</span>
           ))}
         </div>
       </Section>
@@ -142,7 +142,7 @@ function PredictionView({ country, prediction }) {
         </p>
       </Section>
 
-      <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: '#1A4060', marginTop: 8, paddingTop: 12, borderTop: '1px solid #0A3A55' }}>
+      <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: '#3A5A80', marginTop: 8, paddingTop: 12, borderTop: '1px solid #1E3D60' }}>
         ANALYSIS — {new Date(prediction.analysisDate).toLocaleString('es-ES')}
       </div>
     </div>
@@ -152,8 +152,8 @@ function PredictionView({ country, prediction }) {
 function HistoryList({ history, onHistoryClick }) {
   if (!history.length) return null
   return (
-    <div style={{ borderTop: '1px solid #0A3A55', padding: '12px 20px', flexShrink: 0 }}>
-      <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: '#1A4060', letterSpacing: '.08em', marginBottom: 8 }}>
+    <div style={{ borderTop: '1px solid #1E3D60', padding: '12px 20px', flexShrink: 0 }}>
+      <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: '#3A5A80', letterSpacing: '.08em', marginBottom: 8 }}>
         HISTORIAL
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
@@ -185,12 +185,12 @@ export default function ConflictPanel({ country, prediction, loading, error, his
 
   const panelStyle = isMobile
     ? { position: 'fixed', inset: 0, zIndex: 100, background: 'var(--bg-panel)', display: 'flex', flexDirection: 'column' }
-    : { width: 380, background: 'rgba(3,10,22,0.97)', borderLeft: '1px solid #0A3A55', display: 'flex', flexDirection: 'column', flexShrink: 0, overflow: 'hidden' }
+    : { width: 380, background: 'rgba(13,30,53,0.98)', borderLeft: '1px solid #1E3D60', display: 'flex', flexDirection: 'column', flexShrink: 0, overflow: 'hidden' }
 
   return (
     <div style={panelStyle}>
       {/* Panel header */}
-      <div style={{ padding: '14px 20px', borderBottom: '1px solid #0A3A55', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+      <div style={{ padding: '14px 20px', borderBottom: '1px solid #1E3D60', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
         <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600, fontSize: 11, letterSpacing: '.1em', color: '#3A7A99' }}>
           PANEL DE ANÁLISIS
         </span>
@@ -201,7 +201,7 @@ export default function ConflictPanel({ country, prediction, loading, error, his
 
       {/* Tabs — only when a country is selected */}
       {country && (
-        <div style={{ display: 'flex', borderBottom: '1px solid #0A3A55', flexShrink: 0 }}>
+        <div style={{ display: 'flex', borderBottom: '1px solid #1E3D60', flexShrink: 0 }}>
           {[['analysis', 'ANÁLISIS IA'], ['comments', 'COMENTARIOS']].map(([key, label]) => (
             <button
               key={key}

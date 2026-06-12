@@ -64,7 +64,7 @@ export default function CommentsSection({ country, user }) {
     <div style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'hidden' }}>
       {/* Header */}
       <div style={{ padding: '10px 20px 6px', flexShrink: 0 }}>
-        <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, letterSpacing: '.1em', color: '#1A4060' }}>
+        <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, letterSpacing: '.1em', color: '#3A5A80' }}>
           {comments.length} {comments.length === 1 ? 'COMENTARIO' : 'COMENTARIOS'} — {country.toUpperCase()}
         </span>
       </div>
@@ -90,8 +90,8 @@ export default function CommentsSection({ country, user }) {
           <div key={c.id} style={{
             display: 'flex', gap: 10, marginBottom: 10,
             padding: '10px 12px',
-            background: 'rgba(0,20,40,0.45)',
-            border: '1px solid #0A3A55',
+            background: 'rgba(15,35,70,0.5)',
+            border: '1px solid #1E3D60',
             borderRadius: 6
           }}>
             <Avatar name={c.username} />
@@ -100,7 +100,7 @@ export default function CommentsSection({ country, user }) {
                 <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600, fontSize: 12, color: '#90CAF9' }}>
                   {c.username}
                 </span>
-                <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 9, color: '#1A4060' }}>
+                <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 9, color: '#3A5A80' }}>
                   {timeAgo(c.createdAt)}
                 </span>
               </div>
@@ -113,7 +113,7 @@ export default function CommentsSection({ country, user }) {
       </div>
 
       {/* Input */}
-      <div style={{ padding: '10px 20px 16px', borderTop: '1px solid #0A3A55', flexShrink: 0 }}>
+      <div style={{ padding: '10px 20px 16px', borderTop: '1px solid #1E3D60', flexShrink: 0 }}>
         {error && (
           <div style={{ color: '#FF1744', fontSize: 11, fontFamily: 'JetBrains Mono, monospace', marginBottom: 8 }}>
             {error}
@@ -149,7 +149,7 @@ export default function CommentsSection({ country, user }) {
             {posting ? '...' : 'ENVIAR'}
           </button>
         </form>
-        <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 9, color: '#0A2840', marginTop: 4, textAlign: 'right' }}>
+        <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 9, color: '#2A4A70', marginTop: 4, textAlign: 'right' }}>
           {text.length}/500
         </div>
       </div>

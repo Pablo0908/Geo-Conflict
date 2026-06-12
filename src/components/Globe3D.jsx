@@ -15,11 +15,11 @@ const RISK_HEX = {
 
 // Deep-space ocean: almost black with deep blue emissive
 const GLOBE_MATERIAL = new THREE.MeshPhongMaterial({
-  color:              new THREE.Color('#030614'),
-  emissive:           new THREE.Color('#0A0F30'),
-  emissiveIntensity:  0.4,
-  shininess:          18,
-  specular:           new THREE.Color('#1A2A6C'),
+  color:              new THREE.Color('#0A1828'),
+  emissive:           new THREE.Color('#0F2040'),
+  emissiveIntensity:  0.45,
+  shininess:          20,
+  specular:           new THREE.Color('#1E3A80'),
 })
 
 export default function Globe3D({ onCountryClick, selectedCode, history }) {
@@ -78,9 +78,9 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
     if (selectedCode && d.id?.toString() === selectedCode) {
       return risk ? RISK_HEX[risk] + 'CC' : 'rgba(255,23,68,0.75)'
     }
-    if (name === hovered) return 'rgba(30,136,229,0.42)'
-    if (risk) return RISK_HEX[risk] + '44'
-    return 'rgba(0,15,55,0.55)'
+    if (name === hovered) return 'rgba(30,136,229,0.50)'
+    if (risk) return RISK_HEX[risk] + '55'
+    return 'rgba(15,35,75,0.65)'
   }, [selectedCode, hovered, historyMap])
 
   // Hovered/selected countries rise slightly
@@ -94,8 +94,8 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
   // Side color — dark teal extrusion
   const sideColor = useCallback((d) => {
     const name = d.properties?.name
-    if (name === hovered) return 'rgba(30,136,229,0.25)'
-    return 'rgba(0,10,35,0.85)'
+    if (name === hovered) return 'rgba(30,136,229,0.30)'
+    return 'rgba(10,25,55,0.85)'
   }, [hovered])
 
   // Border / stroke color — the key hologram element
@@ -119,7 +119,7 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
     const badge = risk
       ? `<span style="margin-left:8px;background:${rc}22;color:${rc};border:1px solid ${rc};border-radius:3px;padding:1px 7px;font-size:10px;font-family:JetBrains Mono,monospace;letter-spacing:.05em;">${risk}</span>`
       : `<span style="margin-left:8px;color:#5BA8E5;font-size:10px;font-family:JetBrains Mono,monospace;">ANALIZAR</span>`
-    return `<div style="background:rgba(2,6,20,0.95);border:1px solid #1E88E5;border-radius:4px;padding:7px 14px;font-family:Space Grotesk,sans-serif;display:flex;align-items:center;box-shadow:0 0 18px rgba(30,136,229,0.35),0 4px 24px rgba(0,0,0,.9);white-space:nowrap;"><span style="color:#90CAF9;font-size:12px;font-weight:600;letter-spacing:.04em;">${name}</span>${badge}</div>`
+    return `<div style="background:rgba(12,28,55,0.95);border:1px solid #1E88E5;border-radius:4px;padding:7px 14px;font-family:Space Grotesk,sans-serif;display:flex;align-items:center;box-shadow:0 0 18px rgba(30,136,229,0.35),0 4px 24px rgba(0,0,0,.9);white-space:nowrap;"><span style="color:#90CAF9;font-size:12px;font-weight:600;letter-spacing:.04em;">${name}</span>${badge}</div>`
   }, [historyMap])
 
   // ── Hover handler ─────────────────────────────────────────────────────────
@@ -149,7 +149,7 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
   }, [onCountryClick])
 
   return (
-    <div ref={containerRef} style={{ flex: 1, position: 'relative', overflow: 'hidden', background: '#050810' }}>
+    <div ref={containerRef} style={{ flex: 1, position: 'relative', overflow: 'hidden', background: '#0D1F35' }}>
       {/* Subtle grid overlay */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1,
@@ -165,7 +165,7 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
           ref={globeRef}
           width={dims.w}
           height={dims.h}
-          backgroundColor="#050810"
+          backgroundColor="#0D1F35"
           atmosphereColor="#1565C0"
           atmosphereAltitude={0.25}
           globeMaterial={GLOBE_MATERIAL}
@@ -184,7 +184,7 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
       {/* Vignette */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
-        background: 'radial-gradient(ellipse at center, transparent 36%, #050810 76%)'
+        background: 'radial-gradient(ellipse at center, transparent 40%, #0D1F35 82%)'
       }} />
     </div>
   )

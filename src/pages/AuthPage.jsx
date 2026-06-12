@@ -4,7 +4,7 @@ import { login, register } from '../services/authApi.js'
 const INPUT_BASE = {
   width: '100%',
   background: 'rgba(0,20,40,0.7)',
-  border: '1px solid #0A3A55',
+  border: '1px solid #1E3D60',
   borderRadius: 4,
   padding: '10px 14px',
   color: '#C8F0FF',
@@ -72,7 +72,7 @@ export default function AuthPage({ onSuccess }) {
   return (
     <div style={{
       minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
-      background: '#020912', position: 'relative', overflow: 'hidden'
+      background: '#0D1F35', position: 'relative', overflow: 'hidden'
     }}>
       {/* Hologram grid */}
       <div style={{
@@ -86,7 +86,7 @@ export default function AuthPage({ onSuccess }) {
       {/* Center glow */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none',
-        background: 'radial-gradient(ellipse at center, rgba(0,80,160,0.18) 0%, transparent 65%)'
+        background: 'radial-gradient(ellipse at center, rgba(20,80,180,0.30) 0%, transparent 65%)'
       }} />
 
       <div style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: 400, padding: '0 20px' }}>
@@ -106,8 +106,8 @@ export default function AuthPage({ onSuccess }) {
 
         {/* Card */}
         <div style={{
-          background: 'rgba(3,10,22,0.97)',
-          border: '1px solid #0A3A55',
+          background: 'rgba(13,30,55,0.97)',
+          border: '1px solid #1E3D60',
           borderRadius: 8,
           padding: 32,
           boxShadow: '0 0 50px rgba(0,100,200,0.1), 0 24px 60px rgba(0,0,0,0.7)'
