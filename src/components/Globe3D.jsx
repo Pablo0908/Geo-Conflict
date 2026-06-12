@@ -15,11 +15,11 @@ const RISK_HEX = {
 
 // Deep-space ocean: almost black with deep blue emissive
 const GLOBE_MATERIAL = new THREE.MeshPhongMaterial({
-  color:              new THREE.Color('#1A3A5C'),
-  emissive:           new THREE.Color('#1A3060'),
-  emissiveIntensity:  0.7,
-  shininess:          30,
-  specular:           new THREE.Color('#3A6AAC'),
+  color:              new THREE.Color('#112238'),
+  emissive:           new THREE.Color('#142848'),
+  emissiveIntensity:  0.55,
+  shininess:          22,
+  specular:           new THREE.Color('#2A508C'),
 })
 
 export default function Globe3D({ onCountryClick, selectedCode, history }) {
@@ -78,9 +78,9 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
     if (selectedCode && d.id?.toString() === selectedCode) {
       return risk ? RISK_HEX[risk] + 'CC' : 'rgba(255,23,68,0.75)'
     }
-    if (name === hovered) return 'rgba(30,136,229,0.70)'
-    if (risk) return RISK_HEX[risk] + '88'
-    return 'rgba(30,65,120,0.75)'
+    if (name === hovered) return 'rgba(30,136,229,0.58)'
+    if (risk) return RISK_HEX[risk] + '66'
+    return 'rgba(20,48,95,0.68)'
   }, [selectedCode, hovered, historyMap])
 
   // Hovered/selected countries rise slightly
@@ -166,8 +166,8 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
           width={dims.w}
           height={dims.h}
           backgroundColor="#0D1F35"
-          atmosphereColor="#4A90D9"
-          atmosphereAltitude={0.28}
+          atmosphereColor="#2A6AAA"
+          atmosphereAltitude={0.26}
           globeMaterial={GLOBE_MATERIAL}
           polygonsData={countries}
           polygonCapColor={capColor}
