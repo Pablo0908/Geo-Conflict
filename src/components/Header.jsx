@@ -17,13 +17,14 @@ export default function Header({ analyzedCount, user, onLogout }) {
         <span style={{
           fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: 20,
           letterSpacing: '.1em', color: '#FF1744',
-          textShadow: '0 0 18px rgba(255,23,68,0.55)'
+          textShadow: '0 0 8px rgba(255,23,68,0.9), 0 0 20px rgba(255,23,68,0.6), 0 0 40px rgba(255,23,68,0.3)'
         }}>
           ⊕ CONFLICTLY
         </span>
         <span style={{
           color: '#3A5A99', fontSize: 11, fontFamily: 'JetBrains Mono, monospace',
-          letterSpacing: '.06em', borderLeft: '1px solid #0A1535', paddingLeft: 12
+          letterSpacing: '.06em', borderLeft: '1px solid #0A1535', paddingLeft: 12,
+          textShadow: '0 0 6px rgba(90,128,170,0.65)'
         }}>
           CONFLICT INTELLIGENCE PLATFORM
         </span>
@@ -52,7 +53,7 @@ export default function Header({ analyzedCount, user, onLogout }) {
               }}>
                 {user.username.slice(0, 2).toUpperCase()}
               </div>
-              <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: '#90CAF9' }}>
+              <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: '#90CAF9', textShadow: '0 0 8px rgba(30,136,229,0.75), 0 0 18px rgba(30,136,229,0.4)' }}>
                 {user.username}
               </span>
             </div>
@@ -62,7 +63,8 @@ export default function Header({ analyzedCount, user, onLogout }) {
                 background: 'rgba(255,23,68,0.08)', border: '1px solid rgba(255,23,68,0.3)',
                 borderRadius: 3, padding: '3px 10px', cursor: 'pointer',
                 fontFamily: 'JetBrains Mono, monospace', fontSize: 10,
-                color: '#FF1744', letterSpacing: '.06em', transition: 'all .2s'
+                color: '#FF1744', letterSpacing: '.06em', transition: 'all .2s',
+                textShadow: '0 0 6px rgba(255,23,68,0.8)'
               }}
               onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,23,68,0.18)'; e.currentTarget.style.borderColor = '#FF1744' }}
               onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,23,68,0.08)'; e.currentTarget.style.borderColor = 'rgba(255,23,68,0.3)' }}

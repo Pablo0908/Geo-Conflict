@@ -30,6 +30,7 @@ body {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   line-height: 1.6;
+  text-shadow: 0 0 8px rgba(150,210,255,0.55), 0 0 20px rgba(80,160,255,0.2);
 }
 
 /* Scrollbar */

@@ -97,7 +97,7 @@ export default function CommentsSection({ country, user }) {
             <Avatar name={c.username} />
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600, fontSize: 12, color: '#90CAF9' }}>
+                <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600, fontSize: 12, color: '#90CAF9', textShadow: '0 0 8px rgba(30,136,229,0.8), 0 0 16px rgba(30,136,229,0.4)' }}>
                   {c.username}
                 </span>
                 <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 9, color: '#3A5A80' }}>
@@ -141,7 +141,7 @@ export default function CommentsSection({ country, user }) {
             style={{
               background: 'rgba(30,136,229,0.1)', border: '1px solid #1E88E5',
               borderRadius: 4, padding: '0 14px', cursor: 'pointer',
-              color: '#90CAF9', fontFamily: 'JetBrains Mono, monospace',
+              color: '#90CAF9', textShadow: '0 0 8px rgba(30,136,229,0.85)', fontFamily: 'JetBrains Mono, monospace',
               fontSize: 11, letterSpacing: '.06em', alignSelf: 'stretch',
               opacity: (!text.trim() || posting) ? 0.35 : 1, transition: 'opacity .2s'
             }}

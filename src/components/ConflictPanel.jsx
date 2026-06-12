@@ -31,7 +31,7 @@ function Section({ icon, title, children }) {
         letterSpacing: '.1em', color: '#3A5A99', marginBottom: 8,
         display: 'flex', alignItems: 'center', gap: 6
       }}>
-        <span style={{ color: '#1E88E5' }}>{icon}</span>{title}
+        <span style={{ color: '#1E88E5', textShadow: '0 0 8px rgba(30,136,229,0.9), 0 0 18px rgba(30,136,229,0.5)' }}>{icon}</span>{title}
       </div>
       {children}
     </div>
@@ -212,6 +212,7 @@ export default function ConflictPanel({ country, prediction, loading, error, his
                 letterSpacing: '.08em', color: tab === key ? '#1E88E5' : '#3A5A99',
                 borderBottom: tab === key ? '2px solid #1E88E5' : '2px solid transparent',
                 marginBottom: -1, transition: 'color .2s',
+                textShadow: tab === key ? '0 0 8px rgba(30,136,229,0.85), 0 0 20px rgba(30,136,229,0.4)' : '0 0 5px rgba(90,128,170,0.45)',
                 boxShadow: tab === key ? '0 2px 10px rgba(30,136,229,0.15)' : 'none'
               }}
             >

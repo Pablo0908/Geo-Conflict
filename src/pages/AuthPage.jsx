@@ -95,7 +95,7 @@ export default function AuthPage({ onSuccess }) {
           <div style={{
             fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: 30,
             letterSpacing: '.12em', color: '#FF1744',
-            textShadow: '0 0 28px rgba(255,23,68,0.65)', marginBottom: 8
+            textShadow: '0 0 8px rgba(255,23,68,0.95), 0 0 24px rgba(255,23,68,0.65), 0 0 50px rgba(255,23,68,0.3)', marginBottom: 8
           }}>
             ⊕ CONFLICTLY
           </div>
@@ -124,7 +124,8 @@ export default function AuthPage({ onSuccess }) {
                   fontSize: 11, letterSpacing: '.1em',
                   color: tab === t ? '#1E88E5' : '#3A5A99',
                   borderBottom: tab === t ? '2px solid #1E88E5' : '2px solid transparent',
-                  marginBottom: -1, transition: 'color .2s'
+                  marginBottom: -1, transition: 'color .2s',
+                  textShadow: tab === t ? '0 0 8px rgba(30,136,229,0.85), 0 0 20px rgba(30,136,229,0.4)' : '0 0 6px rgba(90,128,170,0.5)'
                 }}
               >
                 {label}
@@ -159,6 +160,7 @@ export default function AuthPage({ onSuccess }) {
                 cursor: loading ? 'not-allowed' : 'pointer',
                 fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600,
                 fontSize: 13, letterSpacing: '.1em', color: '#90CAF9',
+                textShadow: '0 0 8px rgba(30,136,229,0.85), 0 0 20px rgba(30,136,229,0.45)',
                 boxShadow: loading ? 'none' : '0 0 20px rgba(30,136,229,0.18)',
                 transition: 'all .2s'
               }}
