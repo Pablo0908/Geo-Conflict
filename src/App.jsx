@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import Header from './components/Header.jsx'
 import Globe3D from './components/Globe3D.jsx'
 import ConflictPanel from './components/ConflictPanel.jsx'
@@ -16,7 +17,10 @@ function setCache(countryCode, data) {
 }
 
 export default function App() {
-  const [user, setUser]                 = useState(null)
+  const navigate = useNavigate()
+
+  const [user, setUser]                = useState(null)
+  const [booted, setBooted]            = useState(false)
   const [selectedCountry, setSelected] = useState(null)
   const [prediction, setPrediction]    = useState(null)
   const [loading, setLoading]          = useState(false)
@@ -25,21 +29,25 @@ export default function App() {
   const [analyzedCount, setCount]      = useState(0)
   const [mobileOpen, setMobileOpen]    = useState(false)
 
+  // Restore session before deciding any redirects (avoids login-flash)
   useEffect(() => {
     try {
       const saved = localStorage.getItem('conflictly_user')
       if (saved) setUser(JSON.parse(saved))
     } catch {}
+    setBooted(true)
   }, [])
 
   const handleAuthSuccess = useCallback((data) => {
     setUser(data)
-  }, [])
+    navigate('/', { replace: true })
+  }, [navigate])
 
   const logout = useCallback(() => {
     localStorage.removeItem('conflictly_user')
     setUser(null)
-  }, [])
+    navigate('/access', { replace: true })
+  }, [navigate])
 
   const analyze = useCallback(async (countryName, countryCode) => {
     if (!countryName) return
@@ -77,9 +85,10 @@ export default function App() {
     setMobileOpen(true)
   }, [])
 
-  if (!user) return <AuthPage onSuccess={handleAuthSuccess} />
+  // Wait for the session-restore effect before routing decisions
+  if (!booted) return null
 
-  return (
+  const mainApp = (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', background: 'transparent' }}>
       <StarField />
       <Header analyzedCount={analyzedCount} user={user} onLogout={logout} />
@@ -99,5 +108,22 @@ export default function App() {
         />
       </div>
     </div>
+  )
+
+  return (
+    <Routes>
+      {/* Login / register — redirect to app if already authenticated */}
+      <Route
+        path="/access"
+        element={user ? <Navigate to="/" replace /> : <AuthPage onSuccess={handleAuthSuccess} />}
+      />
+      {/* Main globe app — protected, redirect to /access if not authenticated */}
+      <Route
+        path="/"
+        element={user ? mainApp : <Navigate to="/access" replace />}
+      />
+      {/* Anything else → send to the right place based on auth */}
+      <Route path="*" element={<Navigate to={user ? '/' : '/access'} replace />} />
+    </Routes>
   )
 }
