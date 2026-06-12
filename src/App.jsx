@@ -40,7 +40,7 @@ export default function App() {
 
   const handleAuthSuccess = useCallback((data) => {
     setUser(data)
-    navigate('/', { replace: true })
+    navigate('/main', { replace: true })
   }, [navigate])
 
   const logout = useCallback(() => {
@@ -115,15 +115,15 @@ export default function App() {
       {/* Login / register — redirect to app if already authenticated */}
       <Route
         path="/access"
-        element={user ? <Navigate to="/" replace /> : <AuthPage onSuccess={handleAuthSuccess} />}
+        element={user ? <Navigate to="/main" replace /> : <AuthPage onSuccess={handleAuthSuccess} />}
       />
       {/* Main globe app — protected, redirect to /access if not authenticated */}
       <Route
-        path="/"
+        path="/main"
         element={user ? mainApp : <Navigate to="/access" replace />}
       />
-      {/* Anything else → send to the right place based on auth */}
-      <Route path="*" element={<Navigate to={user ? '/' : '/access'} replace />} />
+      {/* Root and anything else → send to the right place based on auth */}
+      <Route path="*" element={<Navigate to={user ? '/main' : '/access'} replace />} />
     </Routes>
   )
 }
