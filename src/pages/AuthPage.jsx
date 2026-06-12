@@ -172,9 +172,6 @@ export default function AuthPage({ onSuccess }) {
           </form>
         </div>
 
-        <div style={{ textAlign: 'center', marginTop: 22, fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: '#0A1240', letterSpacing: '.08em' }}>
-          SISTEMA DE INTELIGENCIA GEOPOLÍTICA CLASIFICADO
-        </div>
       </div>
     </div>
   )
