@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from 'react'
 import Header from './components/Header.jsx'
 import Globe3D from './components/Globe3D.jsx'
 import ConflictPanel from './components/ConflictPanel.jsx'
+import StarField from './components/StarField.jsx'
 import AuthPage from './pages/AuthPage.jsx'
 import { predictConflicts } from './services/claudeApi.js'
 
@@ -79,7 +80,8 @@ export default function App() {
   if (!user) return <AuthPage onSuccess={handleAuthSuccess} />
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', background: 'var(--bg-deep)' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', background: 'transparent' }}>
+      <StarField />
       <Header analyzedCount={analyzedCount} user={user} onLogout={logout} />
       <div style={{ flex: 1, display: 'flex', overflow: 'hidden', position: 'relative' }}>
         <Globe3D onCountryClick={analyze} selectedCode={selectedCountry?.code} history={history} />

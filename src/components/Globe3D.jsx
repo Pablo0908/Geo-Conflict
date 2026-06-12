@@ -149,7 +149,7 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
   }, [onCountryClick])
 
   return (
-    <div ref={containerRef} style={{ flex: 1, position: 'relative', overflow: 'hidden', background: '#0D1F35' }}>
+    <div ref={containerRef} style={{ flex: 1, position: 'relative', overflow: 'hidden', background: 'transparent' }}>
       {/* Subtle grid overlay */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1,
@@ -165,7 +165,7 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
           ref={globeRef}
           width={dims.w}
           height={dims.h}
-          backgroundColor="#0D1F35"
+          backgroundColor="rgba(0,0,0,0)"
           atmosphereColor="#2A6AAA"
           atmosphereAltitude={0.26}
           globeMaterial={GLOBE_MATERIAL}
@@ -184,7 +184,7 @@ export default function Globe3D({ onCountryClick, selectedCode, history }) {
       {/* Vignette */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
-        background: 'radial-gradient(ellipse at center, transparent 45%, #0D1F35 88%)'
+        background: 'radial-gradient(ellipse at center, transparent 48%, rgba(5,8,16,0.85) 90%)'
       }} />
     </div>
   )
