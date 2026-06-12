@@ -99,7 +99,7 @@ export default function AuthPage({ onSuccess }) {
           }}>
             ⊕ CONFLICTLY
           </div>
-          <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, letterSpacing: '.18em', color: '#1A2060' }}>
+          <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, letterSpacing: '.18em', color: '#7AAAD0', textShadow: '0 0 8px rgba(100,180,255,0.8), 0 0 20px rgba(60,140,255,0.4)' }}>
             CONFLICT INTELLIGENCE PLATFORM
           </div>
         </div>

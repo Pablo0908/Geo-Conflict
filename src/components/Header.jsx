@@ -22,9 +22,9 @@ export default function Header({ analyzedCount, user, onLogout }) {
           ⊕ CONFLICTLY
         </span>
         <span style={{
-          color: '#3A5A99', fontSize: 11, fontFamily: 'JetBrains Mono, monospace',
-          letterSpacing: '.06em', borderLeft: '1px solid #0A1535', paddingLeft: 12,
-          textShadow: '0 0 6px rgba(90,128,170,0.65)'
+          color: '#7AAAD0', fontSize: 11, fontFamily: 'JetBrains Mono, monospace',
+          letterSpacing: '.06em', borderLeft: '1px solid #1E3D60', paddingLeft: 12,
+          textShadow: '0 0 8px rgba(100,180,255,0.8), 0 0 20px rgba(60,140,255,0.4)'
         }}>
           CONFLICT INTELLIGENCE PLATFORM
         </span>
