@@ -1,0 +1,57 @@
+:root {
+  --bg-deep:      #020912;
+  --bg-panel:     #060F1C;
+  --map-ocean:    #020A14;
+  --map-land:     #071A28;
+  --map-hover:    #00D2FF;
+  --map-selected: #00FFD5;
+  --accent-red:   #FF1744;
+  --accent-amber: #FF9100;
+  --accent-green: #00E676;
+  --text-primary: #C8F0FF;
+  --text-muted:   #3A7A99;
+  --border:       #0A3A55;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+/* Skeleton pulse */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.8; }
+}
+
+.skeleton {
+  background: var(--bg-panel);
+  border-radius: 4px;
+  animation: skeleton-pulse 1.8s ease-in-out infinite;
+}

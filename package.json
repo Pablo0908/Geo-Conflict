@@ -1,0 +1,30 @@
+{
+  "name": "conflictly-map",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "server": "node server/proxy.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
+    "@turf/turf": "^7.3.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "react-globe.gl": "^2.38.0",
+    "react-simple-maps": "^3.0.0",
+    "topojson-client": "^3.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^5.0.0"
+  }
+}
